@@ -47,9 +47,22 @@ def swap(i3, _):
         # different workspace and then execute the command.
         i3.command('[workspace="__focused__" con_mark="^_sticky_%s_"] swap container with mark "_sticky_%s"' % (group, group))
 
+def on_new_window(i3, event):
+    instance = event.container.window_instance
+    if not instance:
+        return
+
+    match = re.match(r'^i3-sticky-(.*)$', instance)
+    if not match:
+        return
+
+    # TODO XXX The suffixes must differ
+    event.container.command('mark --add _sticky_%s_1' % match.group(1))
+
 if __name__ == '__main__':
     i3 = i3ipc.Connection()
     i3.on('workspace::focus', swap)
+    i3.on('window::new', on_new_window)
     i3.on('window::fullscreen_mode', swap)
     # TODO XXX Handle window::mark (does not yet exist)
     i3.main()
