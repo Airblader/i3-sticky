@@ -23,8 +23,7 @@ Licensed under The MIT License (https://opensource.org/licenses/MIT), see LICENS
 Requires i3 >= 4.14
 """
 
-# TODO XXX Doesn't have to be restricted to numbers.
-STICKY_GROUP = re.compile(r'^_sticky_(\d+)$')
+STICKY_GROUP = re.compile(r'^_sticky_([^_]+)$')
 
 def get_marks(i3):
     """ Returns a list of all currently used marks. """
