@@ -34,6 +34,17 @@ def get_groups(i3):
     matches = [ STICKY_GROUP.match(mark) for mark in get_marks(i3) ]
     return [ match.group(1) for match in matches if match is not None ]
 
+def get_suffixed_mark(i3, mark):
+    """ Returns the name of a currently unused mark starting with the given mark. """
+    marks = get_marks(i3)
+
+    suffix = 1
+    while True:
+        result = '%s_%d' % (mark, suffix)
+        if not result in marks:
+            return result
+        suffix += 1
+
 def swap(i3, _):
     """ Swaps each sticky container into the current workspace if possible. """
 
@@ -55,8 +66,8 @@ def on_new_window(i3, event):
     if not match:
         return
 
-    # TODO XXX The suffixes must differ
-    event.container.command('mark --add _sticky_%s_1' % match.group(1))
+    mark = get_suffixed_mark(i3, '_sticky_%s' % match.group(1))
+    event.container.command('mark --add %s' % mark)
 
 if __name__ == '__main__':
     i3 = i3ipc.Connection()
