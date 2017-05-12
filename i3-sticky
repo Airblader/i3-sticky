@@ -73,6 +73,8 @@ if __name__ == '__main__':
     i3 = i3ipc.Connection()
     i3.on('workspace::focus', swap)
     i3.on('window::new', on_new_window)
+    # TODO XXX We should allow swapping between fullscreen containers. We could
+    # do this ourselves here, but it'd be better to do it in i3 itself instead.
     i3.on('window::fullscreen_mode', swap)
-    # TODO XXX Handle window::mark (does not yet exist)
+    i3.on('window::mark', swap)
     i3.main()
