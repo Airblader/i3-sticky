@@ -77,4 +77,8 @@ if __name__ == '__main__':
     # do this ourselves here, but it'd be better to do it in i3 itself instead.
     i3.on('window::fullscreen_mode', swap)
     i3.on('window::mark', swap)
-    i3.main()
+
+    try:
+        i3.main()
+    except:
+        pass
