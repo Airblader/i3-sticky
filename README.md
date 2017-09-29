@@ -11,7 +11,7 @@ container is present. This allows you to have a sticky tiling window, i.e., a
 window that is present on multiple workspaces. Note that for floating windows
 you can use the i3 command `sticky`.
 
-This is a work in progress and depends on not-yet merged features in i3.
+This is a work in progress.
 
 ## Usage
 
