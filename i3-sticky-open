@@ -28,6 +28,6 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         group = sys.argv[1]
 
-    win = tk.Tk(className="i3-sticky-%s" % group)
+    win = tk.Tk(className="I3-sticky-%s" % group)
     create_text_widget(win, 'Sticky Placeholder – Group %s' % group)
     win.mainloop()

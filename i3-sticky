@@ -54,11 +54,11 @@ def swap(i3, _):
         i3.command('[workspace="__focused__" con_mark="^_sticky_%s_"] swap container with mark "_sticky_%s"' % (group, group))
 
 def on_new_window(i3, event):
-    instance = event.container.window_instance
+    instance = event.container.window_class
     if not instance:
         return
 
-    match = re.match(r'^i3-sticky-(.*)$', instance)
+    match = re.match(r'^I3-sticky-(.*)$', instance)
     if not match:
         return
 
