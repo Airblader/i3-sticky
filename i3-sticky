@@ -25,18 +25,14 @@ Requires i3 >= 4.14
 
 STICKY_GROUP = re.compile(r'^_sticky_([^_]+)$')
 
-def get_marks(i3):
-    """ Returns a list of all currently used marks. """
-    return json.loads(i3.message(i3ipc.MessageType.GET_MARKS, ''))
-
 def get_groups(i3):
     """ Returns a list of sticky groups currently in use. """
-    matches = [ STICKY_GROUP.match(mark) for mark in get_marks(i3) ]
+    matches = [ STICKY_GROUP.match(mark) for mark in i3.get_marks() ]
     return [ match.group(1) for match in matches if match is not None ]
 
 def get_suffixed_mark(i3, mark):
     """ Returns the name of a currently unused mark starting with the given mark. """
-    marks = get_marks(i3)
+    marks = i3.get_marks()
 
     suffix = 1
     while True:
